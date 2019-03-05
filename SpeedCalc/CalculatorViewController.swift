@@ -30,6 +30,18 @@ class CalculatorViewController: UIViewController {
         animateButton()
     }
     
+    override func becomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            mphTextField.text = ""
+            distanceTextField.text = ""
+            timeTextField.text = ""
+        }
+    }
+    
     let bgImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -38,7 +50,7 @@ class CalculatorViewController: UIViewController {
     }()
     
     // Labels
-    let distanceTextField: UITextField = {
+    var distanceTextField: UITextField = {
         let textField = UITextField()
         textField.contentMode = .scaleToFill
         textField.font = UIFont.boldSystemFont(ofSize: 20)
@@ -53,7 +65,7 @@ class CalculatorViewController: UIViewController {
         return textField
     }()
     
-    let timeTextField: UITextField = {
+    var timeTextField: UITextField = {
         let textField = UITextField()
         textField.contentMode = .scaleToFill
         textField.font = UIFont.boldSystemFont(ofSize: 20)
@@ -69,7 +81,7 @@ class CalculatorViewController: UIViewController {
         return textField
     }()
     
-    let mphTextField: UITextField = {
+    var mphTextField: UITextField = {
         let textField = UITextField()
         textField.contentMode = .scaleToFill
         textField.font = UIFont.boldSystemFont(ofSize: 20)
@@ -164,6 +176,7 @@ class CalculatorViewController: UIViewController {
         distanceTextField.text = ""
         timeTextField.text = ""
         mphTextField.text = ""
+        
     }
     
     
