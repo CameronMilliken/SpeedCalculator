@@ -9,12 +9,8 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-
-// Add Solve A Mystery
-// Create an array of images
-// a function to call that will randomly choose an image.
     
-  
+    // Add Solve A Mystery
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,23 +36,20 @@ class CalculatorViewController: UIViewController {
         "roadTrip6",
         "roadTrip7",
         "roadTrip8"
-        
     ]
     // Random image on start up.
     func randomImage() -> UIImage {
         let idx = Int(arc4random_uniform(UInt32(images.count)))
         guard let image = UIImage(named: images[idx]) else { fatalError() }
-        
         return image
     }
-    
     
     func setupView() {
         bgImageView.image = randomImage()
         
     }
     
-    
+    // Needed for the shake feature
     override func becomeFirstResponder() -> Bool {
         return true
     }
@@ -72,7 +65,7 @@ class CalculatorViewController: UIViewController {
     let bgImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-//        imageView.image = #imageLiteral(resourceName: "roadTrip4")
+        //        imageView.image = #imageLiteral(resourceName: "roadTrip4")
         return imageView
     }()
     
@@ -83,7 +76,7 @@ class CalculatorViewController: UIViewController {
         textField.font = UIFont.boldSystemFont(ofSize: 20)
         textField.textColor = .black
         textField.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0.8492883134)
-
+        
         textField.placeholder = "Distance in miles"
         textField.textAlignment = .center
         textField.layer.cornerRadius = 12
@@ -104,7 +97,7 @@ class CalculatorViewController: UIViewController {
         textField.keyboardType = .decimalPad
         textField.layer.cornerRadius = 12
         textField.clipsToBounds = true
-
+        
         return textField
     }()
     
@@ -180,7 +173,7 @@ class CalculatorViewController: UIViewController {
         UIView.animateKeyframes(withDuration: 2, delay: 1, options: [], animations: {
             self.cancelButton.transform = .identity
         }, completion: nil)
-       
+        
         self.getSpeedButton.transform = CGAffineTransform(scaleX: 0, y: 0)
         UIView.animateKeyframes(withDuration: 2, delay: 0.75, options: [], animations: {
             self.getSpeedButton.transform = .identity
@@ -196,8 +189,6 @@ class CalculatorViewController: UIViewController {
             self.getMilageButton.transform = .identity
         }, completion: nil)
     }
-    
-    
     
     @objc func cancelButton(sender:UIButton!){
         distanceTextField.text = ""
@@ -222,22 +213,22 @@ class CalculatorViewController: UIViewController {
     
     
     @objc func getSpeedButton(sender: UIButton!) {
-
-//changes the color of the button when tapped.
-//        UIView.animate(withDuration: 0.2, delay: 0, options: [.autoreverse], animations: {
-//            self.getSpeedButton.backgroundColor = UIColor.darkGray
-//        }) { (_) in
-//            self.getSpeedButton.backgroundColor = UIColor.lightGray
-//        }
+        
+        //changes the color of the button when tapped.
+        //        UIView.animate(withDuration: 0.2, delay: 0, options: [.autoreverse], animations: {
+        //            self.getSpeedButton.backgroundColor = UIColor.darkGray
+        //        }) { (_) in
+        //            self.getSpeedButton.backgroundColor = UIColor.lightGray
+        //        }
         guard let distanceAsString = distanceTextField.text else {return}
         guard let distance = Float(distanceAsString) else {return}
         guard let timeAsString = timeTextField.text else {return}
         guard let time = Float(timeAsString) else {return}
         let speed = distance / time
         mphTextField.text = "\(speed) MPH"
-      
         
-        }
+    }
+    
     @objc func getTimeButton(sender: UIButton!) {
         guard let distanceAsString = distanceTextField.text else {return}
         guard let distance = Float(distanceAsString) else {return}
@@ -287,13 +278,13 @@ class CalculatorViewController: UIViewController {
         getMilageButton.addTarget(self, action: #selector(getMilageButton(sender:)), for: .touchUpInside)
         getTimeButton.addTarget(self, action: #selector(getTimeButton(sender:)), for: .touchUpInside)
         getSpeedButton.addTarget(self, action: #selector(getSpeedButton(sender:)), for: .touchUpInside)
-        }
+    }
     
     
     //Constraints
     
     func constrainLabelStackView() {
-      labelStackView.anchor(top: self.view.topAnchor, bottom: nil, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: self.view.frame.height/4, paddingBottom: 0, paddingLeft: 24, paddingRight: 24, width: nil, height: nil)
+        labelStackView.anchor(top: self.view.topAnchor, bottom: nil, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: self.view.frame.height/4, paddingBottom: 0, paddingLeft: 24, paddingRight: 24, width: nil, height: nil)
     }
     
     func constrainButtonStackVIew() {
