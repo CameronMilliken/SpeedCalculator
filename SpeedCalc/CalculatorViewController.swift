@@ -30,10 +30,11 @@ class CalculatorViewController: UIViewController {
         animateButton()
     }
     
+    
     override func becomeFirstResponder() -> Bool {
         return true
     }
-    
+    //Clears the textfields when you shake your phone. 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             mphTextField.text = ""
