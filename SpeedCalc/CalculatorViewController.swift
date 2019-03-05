@@ -23,6 +23,7 @@ class CalculatorViewController: UIViewController {
         constrainLabelStackView()
         constrainBGImageView()
         constrainButtonStackVIew()
+        setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,11 +31,36 @@ class CalculatorViewController: UIViewController {
         animateButton()
     }
     
+    //Background Image Array
+    let images = [
+        "roadTrip",
+        "roadTrip2",
+        "roadTrip4",
+        "roadTrip5",
+        "roadTrip6",
+        "roadTrip7",
+        "roadTrip8"
+        
+    ]
+    // Random image on start up.
+    func randomImage() -> UIImage {
+        let idx = Int(arc4random_uniform(UInt32(images.count)))
+        guard let image = UIImage(named: images[idx]) else { fatalError() }
+        
+        return image
+    }
+    
+    
+    func setupView() {
+        bgImageView.image = randomImage()
+        
+    }
+    
     
     override func becomeFirstResponder() -> Bool {
         return true
     }
-    //Clears the textfields when you shake your phone. 
+    //Clears the textfields when you shake your phone.
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             mphTextField.text = ""
@@ -46,7 +72,7 @@ class CalculatorViewController: UIViewController {
     let bgImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = #imageLiteral(resourceName: "roadTrip4")
+//        imageView.image = #imageLiteral(resourceName: "roadTrip4")
         return imageView
     }()
     
@@ -198,11 +224,11 @@ class CalculatorViewController: UIViewController {
     @objc func getSpeedButton(sender: UIButton!) {
 
 //changes the color of the button when tapped.
-        UIView.animate(withDuration: 0.2, delay: 0, options: [.autoreverse], animations: {
-            self.getSpeedButton.backgroundColor = UIColor.darkGray
-        }) { (_) in
-            self.getSpeedButton.backgroundColor = UIColor.lightGray
-        }
+//        UIView.animate(withDuration: 0.2, delay: 0, options: [.autoreverse], animations: {
+//            self.getSpeedButton.backgroundColor = UIColor.darkGray
+//        }) { (_) in
+//            self.getSpeedButton.backgroundColor = UIColor.lightGray
+//        }
         guard let distanceAsString = distanceTextField.text else {return}
         guard let distance = Float(distanceAsString) else {return}
         guard let timeAsString = timeTextField.text else {return}
